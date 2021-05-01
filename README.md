@@ -17,13 +17,12 @@ I used MVVM architected on this project. I use the Observable class for data bin
     │       ├── CitySearchController
     │       ├── MainController
     │       ├── Splash
-    ├── Extension                     
-    ├── Helper                    
-    ├── tools                   
-    ├── Manager
-    ├── Observable
-    ├── Request
-    ├── UIApplication
+    │   ├── Extension                     
+    │   ├── Helper                    
+    │   ├── Manager
+    │   ├── Observable
+    │   ├── Request
+    │   ├── UIApplication
     └── README.md
 
 
