@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="17701" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="c7D-S9-Gik">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="17703"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="System colors in document resources" minToolsVersion="11.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--City Search Controller-->
+        <scene sceneID="ogb-1a-HOc">
+            <objects>
+                <viewController storyboardIdentifier="CitySearchController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="c7D-S9-Gik" customClass="CitySearchController" customModule="WeatherApp" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="RaY-sc-SWt">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="City Name" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Mh3-RY-XvY">
+                                <rect key="frame" x="15" y="62" width="384" height="48"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="48" id="THQ-bN-Pfx"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="istanbul 38o" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="d1N-hB-qUh">
+                                <rect key="frame" x="61" y="146" width="338" height="21"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Tf3-UQ-rUE">
+                                <rect key="frame" x="0.0" y="816" width="414" height="46"/>
+                                <color key="backgroundColor" systemColor="systemGreenColor"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="46" id="jhy-DY-HUu"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="15"/>
+                                <state key="normal" title="Ekle">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="submitButtonTapped:" destination="c7D-S9-Gik" eventType="touchUpInside" id="GBA-ek-RBl"/>
+                                </connections>
+                            </button>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="iPt-sW-AhF">
+                                <rect key="frame" x="15" y="140" width="36" height="36"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="36" id="SFM-N8-ImI"/>
+                                    <constraint firstAttribute="height" constant="36" id="jLG-lU-tad"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <viewLayoutGuide key="safeArea" id="Dob-0Q-rPY"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                        <constraints>
+                            <constraint firstItem="Mh3-RY-XvY" firstAttribute="top" secondItem="Dob-0Q-rPY" secondAttribute="top" constant="18" id="0R9-kD-9vs"/>
+                            <constraint firstItem="Dob-0Q-rPY" firstAttribute="trailing" secondItem="d1N-hB-qUh" secondAttribute="trailing" constant="15" id="1jL-yn-ydh"/>
+                            <constraint firstItem="Tf3-UQ-rUE" firstAttribute="trailing" secondItem="Dob-0Q-rPY" secondAttribute="trailing" id="CUV-c0-dL5"/>
+                            <constraint firstItem="d1N-hB-qUh" firstAttribute="top" secondItem="Mh3-RY-XvY" secondAttribute="bottom" constant="36" id="GMu-4S-OiM"/>
+                            <constraint firstItem="Mh3-RY-XvY" firstAttribute="leading" secondItem="Dob-0Q-rPY" secondAttribute="leading" constant="15" id="KIH-Xn-ILp"/>
+                            <constraint firstItem="Dob-0Q-rPY" firstAttribute="trailing" secondItem="Mh3-RY-XvY" secondAttribute="trailing" constant="15" id="Sp0-ll-Rkf"/>
+                            <constraint firstItem="d1N-hB-qUh" firstAttribute="leading" secondItem="iPt-sW-AhF" secondAttribute="trailing" constant="10" id="W8V-bX-vKS"/>
+                            <constraint firstItem="Tf3-UQ-rUE" firstAttribute="leading" secondItem="Dob-0Q-rPY" secondAttribute="leading" id="a74-3M-wJs"/>
+                            <constraint firstItem="iPt-sW-AhF" firstAttribute="leading" secondItem="Dob-0Q-rPY" secondAttribute="leading" constant="15" id="e52-I4-WKa"/>
+                            <constraint firstItem="iPt-sW-AhF" firstAttribute="top" secondItem="Mh3-RY-XvY" secondAttribute="bottom" constant="30" id="nb9-Pc-IbN"/>
+                            <constraint firstItem="Dob-0Q-rPY" firstAttribute="bottom" secondItem="Tf3-UQ-rUE" secondAttribute="bottom" id="rj2-IA-tin"/>
+                        </constraints>
+                    </view>
+                    <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+                    <connections>
+                        <outlet property="cityWeatherImage" destination="iPt-sW-AhF" id="5Xn-Mi-WIR"/>
+                        <outlet property="infoLabel" destination="d1N-hB-qUh" id="IrC-Df-7GN"/>
+                        <outlet property="submitButton" destination="Tf3-UQ-rUE" id="XoT-up-fys"/>
+                        <outlet property="textField" destination="Mh3-RY-XvY" id="bNh-ym-dGD"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ULj-zY-cGN" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="50.724637681159422" y="70.982142857142847"/>
+        </scene>
+    </scenes>
+    <resources>
+        <systemColor name="systemBackgroundColor">
+            <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+        </systemColor>
+        <systemColor name="systemGreenColor">
+            <color red="0.20392156862745098" green="0.7803921568627451" blue="0.34901960784313724" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+        </systemColor>
+    </resources>
+</document>
