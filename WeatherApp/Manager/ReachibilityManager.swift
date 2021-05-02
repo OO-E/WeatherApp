@@ -17,10 +17,9 @@ class ReachabilityManager: NSObject {
     private var presentedController: UIViewController?
     
     var isNetworkAvailable : Bool {
-        return reachabilityStatus != .unavailable
+        return reachability.connection != .unavailable ? true : false
     }
     
-    var reachabilityStatus: Reachability.Connection = .unavailable
     let reachability = try! Reachability()
     
     func startMonitoring() {
@@ -66,6 +65,7 @@ class ReachabilityManager: NSObject {
     @objc func reachabilityChanged(notification: Notification) {
         let reachability = notification.object as! Reachability
         triggerObserver(reachability: reachability)
+        
         guard
             let visibleViewController = UIApplication.shared.visibleViewController
             else { return }

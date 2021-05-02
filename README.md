@@ -13,10 +13,10 @@ I used MVVM architected on this project. I use the Observable class for data bin
     ├── WeatherApp
     │   ├── Assets                   
     │   ├── Controller                    
-    │       ├── Base
+    │       ├── BaseController
     │       ├── CitySearchController
     │       ├── MainController
-    │       ├── Splash
+    │       ├── SplashController
     ├── Extension                     
     ├── Helper                    
     ├── tools                   

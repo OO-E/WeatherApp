@@ -23,6 +23,12 @@ class CitySearchViewModel: BaseViewModel {
     }
     
     func searchCity(cityName: String) {
+        
+        if ReachabilityManager.shared.isNetworkAvailable == false {
+            self.errorState.value = .networkError
+            return
+        }
+        
         if let city = cityName.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) {
             self.loaderState.value = .show
             let request = CityWeatherRequest(cityName: city)
@@ -48,6 +54,5 @@ class CitySearchViewModel: BaseViewModel {
         }
        
     }
-    
     
 }

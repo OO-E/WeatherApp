@@ -23,6 +23,7 @@ class BaseViewModel {
 enum ErrorState {
     
     case showWith(title: String, message: String)
+    case networkError
     case logout
     case none
 }

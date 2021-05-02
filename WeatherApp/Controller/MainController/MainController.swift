@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Reachability
 
 class MainController: BaseViewController {
     
@@ -23,7 +24,7 @@ class MainController: BaseViewController {
     }
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        viewModel.getMyLocation()
+     
     }
     
     func configure() {
@@ -36,16 +37,19 @@ class MainController: BaseViewController {
         
         tableView.register(UINib(nibName: "WeatherTableViewCell", bundle: nil), forCellReuseIdentifier: "WeatherTableViewCell")
         
-        
+        viewModel.getSavedList()
         viewModel.cityList.subscribe { (list) in
             self.tableView.reloadData()
         }
         
+        NotificationCenter.default.addObserver(self, selector: #selector(self.reload(notification:)), name: Notification.Name.Main.RELOAD, object: nil)
+        
     }
-   
     
-    override func didTapSearch(sender: AnyObject) {
-        self.router.searchCity()
+    @objc func reload(notification: Notification) {
+        
+        viewModel.getSavedList()
+        viewModel.getMyLocation()
     }
     
     func changeNavigationColor() {
@@ -64,14 +68,29 @@ class MainController: BaseViewController {
             
         }))
         alert.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: { (action) in
-            CacheHelper.remove(city: cityResponse.name)
-            self.viewModel.cityList.value?.remove(at: index.row)
-            self.tableView.reloadData()
+            if let _name = cityResponse.name.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) {
+                CacheHelper.remove(city: _name)
+                self.viewModel.cityList.value?.remove(at: index.row)
+                self.tableView.reloadData()
+            }
+            
         }))
         
         self.present(alert, animated: true, completion: nil)
 
     }
+    
+    override func didTapSearch(sender: AnyObject) {
+        self.router.searchCity()
+    }
+    
+   
+    override func reachabilityChangedStatus(reachibility: Reachability) {
+        super.reachabilityChangedStatus(reachibility: reachibility)
+        
+
+    }
+    
     
 }
 
@@ -107,7 +126,7 @@ extension MainController: UITableViewDelegate, UITableViewDataSource {
         
         tableView.deselectRow(at: indexPath, animated: true)
         let item = viewModel.cityList.value![indexPath.row]
-        if viewModel.myCity == item.name {
+        if viewModel.myCity == item.name.lowercased() {
             
         } else {
             removeItem(index: indexPath)

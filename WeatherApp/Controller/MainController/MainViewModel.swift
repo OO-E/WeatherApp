@@ -19,38 +19,26 @@ class MainViewModel: BaseViewModel {
         
         cityList.value = []
         locationManager.handleAuthorization = { status in
-            
-            if status == .authorizedWhenInUse || status == .authorizedWhenInUse {
-                self.cityList.value?.removeAll()
                 self.getMyLocation()
-            }
-            
         }
     }
     
     func getMyLocation() {
-        cityList.value?.removeAll()
         guard let exposedLocation = self.locationManager.exposedLocation else {
-            getSavedList()
             return
         }
         
-        self.locationManager.getPlace(for: exposedLocation) { [self] (placeMark) in
-            
-        
-            guard let placeMark = placeMark else  {return}
-            
-            if let town = placeMark.locality {
-                self.myCity = town
-                self.fetchWeather(city: town)
-                getSavedList()
-            }
-            
+        guard let lat = self.locationManager.exposedLocation?.coordinate.latitude else {
+            return
         }
+        guard let long = self.locationManager.exposedLocation?.coordinate.longitude else {
+            return
+        }
+        fetchMyLocation(lat: lat, long: long)
     }
     
     func getSavedList() {
-        
+        cityList.value?.removeAll()
         let cityList = CacheHelper.getSavedIDs()
         
         cityList.forEach { (city) in
@@ -60,14 +48,48 @@ class MainViewModel: BaseViewModel {
     }
     
     func fetchWeather(city: String) {
-        let request = CityWeatherRequest(cityName: city)
+        if city == "" {
+            return
+        }
+        
+        guard let _city = city.addingPercentEncoding(withAllowedCharacters: .urlUserAllowed) else {
+            return
+        }
+        
+
+        if ReachabilityManager.shared.isNetworkAvailable == false {
+            self.errorState.value = .networkError
+            return
+        }
+        
+        let request = CityWeatherRequest(cityName: _city)
         RestClient.default.makeRequest(request: request) { (response: CityWeatherResponse?, error: RestClient.Error?) in
             guard let _response = response else {
                 return
             }
-            
-            self.cityList.value?.append(_response)
+            if response?.name == self.myCity {
+                self.cityList.value?.insert(_response, at: 0)
+            } else {
+                self.cityList.value?.append(_response)
+            }
         }
     }
+    
+    func fetchMyLocation(lat: Double, long: Double) {
+        if ReachabilityManager.shared.isNetworkAvailable == false {
+            self.errorState.value = .networkError
+            return
+        }
+        let request = WeatherCoordinateRequest.init(lat: lat, long: long)
+        RestClient.default.makeRequest(request: request) { (response:CityWeatherResponse? , error: RestClient.Error?) in
+            guard let _response = response else {
+                return
+            }
+            self.cityList.value?.insert(_response, at: 0)
+            self.myCity = _response.name
+        }
+    }
+    
+    
     
 }

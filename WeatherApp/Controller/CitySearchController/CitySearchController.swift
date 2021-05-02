@@ -85,6 +85,7 @@ class CitySearchController: BaseViewController {
                 submitButton.backgroundColor = UIColor(named: "RemoveColor")
                 submitButton.setTitle("Remove City", for: .normal)
             }
+            NotificationCenter.default.post(name: NSNotification.Name.Main.RELOAD, object: nil)
         }
     }
     

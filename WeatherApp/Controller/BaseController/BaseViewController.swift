@@ -17,6 +17,7 @@ class BaseViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         configureRouter()
+        ReachabilityManager.shared.setSubscribe(controller: self)
         
     }
     
@@ -71,6 +72,8 @@ class BaseViewController: UIViewController {
             case .logout:
                 //TODO --
                 break
+            case .networkError:
+                self.showMessageWith(title: "", message: "You don't have any network connection. Please check your connection.")
             case .none:
                 break
             }
@@ -140,13 +143,14 @@ class BaseViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     
+    func reachabilityChangedStatus(reachibility: Reachability) {
+        //If you want subscribe reachability and check connection
+    }
 }
 
 extension BaseViewController {
     
-    func reachabilityChangedStatus(reachibility: Reachability) {
-        //If you want subscribe reachability and check connection
-    }
+   
     
     func showMessageWith(title: String, message: String) {
         mainThread {
